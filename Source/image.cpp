@@ -138,7 +138,10 @@ void Image::ExtractChannel(int channel)
 
 void Image::Quantize (int nbits)
 {
-  /* Your Work Here (Section 3.3.1) */
+    double b = pow(2, nbits);
+    for (int i = 0; i < num_pixels; i++){
+        //double q = floor()
+    }
 }
 
 
