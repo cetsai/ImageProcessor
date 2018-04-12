@@ -233,9 +233,16 @@ void Image::Blur(int n)
   /* Your Work Here (Section 3.4.1) */
 }
 
+static int sharpenFilter[3][3]=
+{
+    {-1, -2, -1},
+    {-2, 19, -2},
+    {-1, -2, -1}
+}
+
 void Image::Sharpen() 
 {
-  /* Your Work Here (Section 3.4.2) */
+  Convolve(sharpenFilter, 3, 7, 0);
 }
 
 void Image::EdgeDetect(int threshold)
