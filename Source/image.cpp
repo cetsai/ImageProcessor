@@ -128,26 +128,50 @@ Image* Image::Crop(int x, int y, int w, int h)
   return NULL ;
 }
 
-/*
+
 void Image::ExtractChannel(int channel)
 {
-  // For extracting a channel (R,G,B) of image.  
-  // Not required for the assignment
+    // For extracting a channel (R,G,B) of image.  
+    // Not required for the assignment
+    for(int i = 0; i < num_pixels; i++){
+        switch(channel){
+            case 0: 
+                pixels[i].Set(pixels[i].r, 0, 0);
+                break;
+            case 1: 
+                pixels[i].Set(0, pixels[i].g, 0);
+                break;
+            case 2: 
+                pixels[i].Set(0, 0, pixels[i].b);
+                break;
+        }
+    }
 }
-*/
+
 
 void Image::Quantize (int nbits)
 {
     double b = pow(2, nbits);
+    double f = 255.0 / (b - 1);
     for (int i = 0; i < num_pixels; i++){
-        //double q = floor()
+        double qr = (floor(pixels[i].r * b/ 256)) * f;
+        double qg = (floor(pixels[i].g * b/ 256)) * f;
+        double qb = (floor(pixels[i].b * b/ 256)) * f;
+        pixels[i].SetClamp(qr, qg, qb);
     }
 }
 
 
 void Image::RandomDither (int nbits)
 {
-  /* Your Work Here (Section 3.3.2) */
+    double b = pow(2, nbits);
+    double f = 255.0 / (b - 1);
+    for (int i = 0; i < num_pixels; i++){
+        double qr = (floor(pixels[i].r * b/ 256)) * f;
+        double qg = (floor(pixels[i].g * b/ 256)) * f;
+        double qb = (floor(pixels[i].b * b/ 256)) * f;
+        pixels[i].SetClamp(qr, qg, qb);
+    }
 }
 
 
